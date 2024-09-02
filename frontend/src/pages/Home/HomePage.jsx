@@ -1,8 +1,15 @@
 import React from 'react'
-
+import { Helmet } from "react-helmet";
 const HomePage = () => {
     return (
-        <div>HomePage</div>
+        <div>
+            <Helmet>
+                <title>Heritage | Home</title>
+            </Helmet>
+            <div>
+               
+            </div>
+        </div>
     )
 }
 
