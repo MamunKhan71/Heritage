@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from "react-helmet";
 import Hero from '../../components/Hero';
-import FirstSection from './FirstSection';
+import FeaturedSection from './FeaturedSection';
 const HomePage = () => {
     return (
         <div>
@@ -10,7 +10,9 @@ const HomePage = () => {
             </Helmet>
             <div>
                 <Hero />
-                <FirstSection />
+                <FeaturedSection isReversed={false} />
+                <FeaturedSection isReversed={true} />
+                <FeaturedSection isReversed={false} />
             </div>
         </div>
     )

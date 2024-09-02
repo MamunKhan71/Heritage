@@ -1,11 +1,11 @@
 import { Search } from 'lucide-react'
 import React from 'react'
 
-const FirstSection = () => {
+const FeaturedSection = ({ isReversed }) => {
     return (
         <div className='p-16 w-full'>
-            <div className='flex w-full'>
-                <div className='relative flex-1 w-full'>
+            <div className={`flex w-full ${isReversed ? 'flex-row-reverse' : 'flex-row'} justify-between gap-12`}>
+                <div className='relative flex-1 w-full justify-end'>
                     <img className='h-96 object-cover rounded-lg' src="firstSection.jpg" alt="" />
                     <img className='h-64 rounded-lg absolute -bottom-5 right-64' src="secondSection.jpg" alt="" />
                     <svg
@@ -40,7 +40,7 @@ const FirstSection = () => {
                         </g>
                     </svg>
                 </div>
-                <div className='flex-1 space-y-12'>
+                <div className='flex-1 space-y-12 w-full'>
                     <div className='space-y-4'>
                         <div className='flex items-center gap-2'>
                             <hr className='w-16 border-[#F06711] border-2' />
@@ -52,7 +52,6 @@ const FirstSection = () => {
                     <p className='drop-shadow-md text-base'>It is a long established fact that a reader will be distracted by the
                         readable content of a page when looking at its layout.</p>
                     <button className="btn btn-wide bg-[#ECF5FF] border-none text-lg rounded-none text-[#0059B1]"><Search className='text-[#0059B1]' />Find Property</button>
-
                 </div>
 
 
@@ -61,4 +60,4 @@ const FirstSection = () => {
     )
 }
 
-export default FirstSection
+export default FeaturedSection
