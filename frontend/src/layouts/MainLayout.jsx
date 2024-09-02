@@ -8,7 +8,9 @@ const MainLayout = () => {
         <div className='container mx-auto font-primary'>
             <Navbar />
             <div className='space-y-48'>
-                <Outlet />
+                <div className='min-h-screen'>
+                    <Outlet />
+                </div>
                 <Footer />
             </div>
         </div>
