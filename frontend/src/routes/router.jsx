@@ -8,6 +8,7 @@ import PropertyDetails from '../pages/PropertyListings/PropertyDetails';
 import AboutPage from '../pages/About/AboutPage';
 import Register from '../pages/Authentication/Register';
 import Login from '../pages/Authentication/Login';
+import PropertyUpload from '../pages/PropertyListings/PropertyUpload';
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login />
+            },
+            {
+                path: '/property-upload',
+                element: <PropertyUpload />
             }
         ]
     },
