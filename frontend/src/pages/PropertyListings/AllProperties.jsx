@@ -1,12 +1,12 @@
 import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { DollarSign, MapPinned, PinIcon, Search } from 'lucide-react'
+import { ArrowDownCircle, DollarSign, MapPinned, PinIcon, Search } from 'lucide-react'
 const AllProperties = () => {
     return (
         <div>
             <div className={`bg-[url('header.jpg')] h-80 w-full relative`}>
-                <div className='bg-white  max-w-3xl w-full absolute top-1/2 left-1/2 -translate-x-1/2'>
+                <div className='bg-white rounded-lg shadow-lg backdrop-blur-sm max-w-3xl w-full absolute top-1/2 left-1/2 -translate-x-1/2'>
                     <Tabs className={'p-6 font-medium text-[#4B5563]'}>
                         <TabList >
                             <Tab>Buy</Tab>
@@ -120,6 +120,36 @@ const AllProperties = () => {
                             </label>
                         </TabPanel>
                     </Tabs>
+                </div>
+            </div>
+            <div className='mt-48 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4'>
+                <div className='bg-[#FDF0E7] p-2 lg:p-4 space-y-8'>
+                    <div>
+                        <h1 className='text-4xl font-bold text-[#EE6611]'>2k+</h1>
+                        <p>New Flat Listed</p>
+                    </div>
+                    <span className='flex items-center gap-2 justify-between underline text-[#EE6611]'> View all <ArrowDownCircle /></span>
+                </div>
+                <div className='bg-[#ECF5FF] p-2 lg:p-4 space-y-8'>
+                    <div>
+                        <h1 className='text-4xl font-bold text-[#0051A1]'>2k+</h1>
+                        <p>New Flat Listed</p>
+                    </div>
+                    <span className='flex items-center gap-2 justify-between underline text-[#0051A1]'> View all <ArrowDownCircle /></span>
+                </div>
+                <div className='bg-[#FDF0E7] p-2 lg:p-4 space-y-8'>
+                    <div>
+                        <h1 className='text-4xl font-bold text-[#EE6611]'>2k+</h1>
+                        <p>New Flat Listed</p>
+                    </div>
+                    <span className='flex items-center gap-2 justify-between underline text-[#EE6611]'> View all <ArrowDownCircle /></span>
+                </div>
+                <div className='bg-[#ECF5FF] p-2 lg:p-4 space-y-8'>
+                    <div>
+                        <h1 className='text-4xl font-bold text-[#0051A1]'>2k+</h1>
+                        <p>New Flat Listed</p>
+                    </div>
+                    <span className='flex items-center gap-2 justify-between underline text-[#0051A1]'> View all <ArrowDownCircle /></span>
                 </div>
             </div>
         </div>
