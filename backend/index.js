@@ -30,7 +30,7 @@ async function run() {
         const propertyCollection = db.collection('properties')
 
         app.get('/properties', async (req, res) => {
-            const properties = await propertyCollection.find().project({ "propertyDetails.price": 1, "propertyDetails.title": 1, "propertyDetails.location": 1, "propertyDetails.mainImage": 1 }).toArray()
+            const properties = await propertyCollection.find().project({ "propertyDetails.price": 1, "propertyDetails.title": 1, "propertyDetails.location": 1, "propertyDetails.mainImage": 1, "propertySummary.status": 1, "propertySummary.type": 1 }).toArray()
             res.send(properties);
         })
         app.get('/properties/:id', async (req, res) => {
@@ -39,6 +39,12 @@ async function run() {
             const result = await propertyCollection.findOne(query)
             res.send(result)
         })
+        app.post('/add-property', async (req, res) => {
+            const newData = req.body
+            const result = await propertyCollection.insertOne(newData)
+            res.status(200).send({ message: "Success" })
+        })
+
     } finally {
         // Ensures that the client will close when you finish/error
         // await client.close();
