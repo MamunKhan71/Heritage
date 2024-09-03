@@ -1,17 +1,48 @@
 import { BathIcon, Battery, Bed, BedDouble, BlendIcon, DownloadCloud, GlassWater, House, ListFilter, Lock, LucideFullscreen, MapPin, ParkingCircle, ParkingCircleOff, PersonStanding, SchoolIcon } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Services from '../Home/Services'
 import PopularProperties from '../../components/PopularProperties'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { AuthContext } from '../../provider/AuthProvider'
 
 const PropertyDetails = () => {
+    const { user } = useContext(AuthContext)
     const [property, setProperty] = useState([])
+    const [reviews, setReviews] = useState([]);
+    const [rating, setRating] = useState(0);
+    const [reviewText, setReviewText] = useState('');
     const { id } = useParams()
+    useEffect(() => {
+        axios.get(`http://localhost:5000/properties/${id}/reviews`)
+            .then(res => {
+                setReviews(res.data || []);
+            })
+            .catch(error => console.error('Error fetching reviews:', error));
+    }, []);
     useEffect(() => {
         axios.get(`http://localhost:5000/properties/${id}`)
             .then(res => setProperty(res.data))
     }, [id])
+
+    const handleReview = (event) => {
+        event.preventDefault();
+        const reviewData = {
+            userId: user?.uid || null,
+            propertyId: id,
+            userName: user?.displayName || null,
+            rating,
+            text: reviewText
+        };
+
+        axios.post(`http://localhost:5000/properties/${id}/reviews`, reviewData)
+            .then(res => {
+                window.location.reload();
+                setReviewText('');
+                setRating(0);
+            })
+            .catch(error => console.error('Error submitting review:', error));
+    };
     return (
         <div className='space-y-6'>
             <div>
@@ -95,9 +126,58 @@ const PropertyDetails = () => {
                 </div>
 
             </div>
+            {/* Reviews Section */}
+            <div className='bg-[#F9FAFB] p-6 rounded-lg border border-[#E5E7EB] space-y-4'>
+                <h1 className='font-semibold text-2xl text-center'>Reviews</h1>
+                <div className='space-y-4 max-w-2xl mx-auto bg-white rounded-lg p-6 border'>
+                    {/* Display existing reviews */}
+                    <div className='max-h-96 overflow-y-scroll w-full'>
+                        {reviews?.map((review, index) => (
+                            <div key={index} className='border-b border-gray-300 pb-4 mb-4'>
+                                <div className='flex items-center gap-2'>
+                                    <span className='font-semibold'>{review.userName}</span>
+                                    <span className='text-yellow-500'>{'★'.repeat(review.rating)}</span>
+                                </div>
+                                <p>{review.text}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Review Form */}
+                    <form onSubmit={handleReview} className='space-y-4 bg-[#F9FAFB] p-4 border rounded-lg'>
+                        <div className='space-y-4'>
+                            <h1 className='text-center font-bold text-lg'>Add Review</h1>
+                            <hr />
+                            <input type="range" min={1} max={5} value={rating} className="range" step={1} onChange={(e) => setRating(Number(e.target.value))} />
+                            <div className="flex w-full justify-between px-2 text-xs">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label className='block text-sm font-medium text-gray-700'>Review</label>
+                            <textarea
+                                value={reviewText}
+                                onChange={(e) => setReviewText(e.target.value)}
+                                placeholder='Write your review here...'
+                                className='textarea w-full p-3 rounded-lg border border-gray-300'
+                            ></textarea>
+                        </div>
+                        <div className='flex items-center justify-center w-full'>
+                            <button type='submit' className='btn bg-[#0059B1] text-center border-none rounded-lg text-white'>
+                                Submit Review
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div>
                 <Services />
             </div>
+
             <div>
                 <PopularProperties />
             </div>

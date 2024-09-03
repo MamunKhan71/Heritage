@@ -6,11 +6,11 @@ import { AuthContext } from "../../provider/AuthProvider";
 import 'animate.css';
 import { Helmet } from "react-helmet";
 import { UploadCloud } from "lucide-react";
-
+import axios from 'axios'
 const PropertyUpload = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, reset } = useForm();
-    const { user } = useContext(AuthContext); 
+    const { user } = useContext(AuthContext);
 
     const onSubmit = (data) => {
         const propertyData = {
@@ -25,7 +25,11 @@ const PropertyUpload = () => {
                     max: parseInt(data.valueRange.max),
                     currentBid: data.valueRange.currentBid
                 },
-                overview: data.overview.split(','), 
+                overview: data.overview.split(','),
+                highestBidder: {
+                    userId: data.highestBidder?.userId || null,
+                    bidAmount: parseInt(data.highestBidder?.bidAmount || 0)
+                }
             },
             propertySummary: {
                 type: data.propertySummary.type,
@@ -36,26 +40,19 @@ const PropertyUpload = () => {
             owner: {
                 name: user?.displayName,
                 email: user?.email
+            },
+            propertyType: {
+                buy: data.propertyType.buy,
+                rent: data.propertyType.rent,
+                pg: data.propertyType.pg,
+                plot: data.propertyType.plot,
+                commercial: data.propertyType.commercial
             }
         };
-
         console.log(propertyData);
 
-        // Post the propertyData to the backend (assuming the backend API exists)
-        // fetch('https://your-api-endpoint/properties', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(propertyData)
-        // })
-        //     .then(response => response.json())
-        //     .then(() => {
-        //         toast.success("Property uploaded successfully!");
-        //         reset(); // Clear the form
-        //         navigate('/'); // Redirect to homepage or properties page
-        //     })
-        //     .catch(() => toast.error("Failed to upload property"));
+        axios.post('http://localhost:5000/add-property', propertyData)
+            .then(res => console.log(res.data))
     };
 
     return (
@@ -116,6 +113,33 @@ const PropertyUpload = () => {
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Overview (Comma Separated)</label>
                         <textarea {...register('overview')} placeholder="Overview (e.g., Power Back Up, Lift, Gymnasium, etc.)" className="textarea w-full p-3 rounded-none border border-gray-300"></textarea>
+                    </div>
+
+                    {/* Property Summary */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-4">Property Type</label>
+                        <div className="flex flex-wrap gap-6 justify-between items-center">
+                            <div className="flex items-center">
+                                <input {...register('propertyType.buy')} type="checkbox" className="mr-2 checkbox" />
+                                <label className="text-sm font-medium text-gray-700">Buy</label>
+                            </div>
+                            <div className="flex items-center">
+                                <input {...register('propertyType.rent')} type="checkbox" className="mr-2 checkbox" />
+                                <label className="text-sm font-medium text-gray-700">Rent</label>
+                            </div>
+                            <div className="flex items-center">
+                                <input {...register('propertyType.pg')} type="checkbox" className="mr-2 checkbox" />
+                                <label className="text-sm font-medium text-gray-700">PG</label>
+                            </div>
+                            <div className="flex items-center">
+                                <input {...register('propertyType.plot')} type="checkbox" className="mr-2 checkbox" />
+                                <label className="text-sm font-medium text-gray-700">Plot</label>
+                            </div>
+                            <div className="flex items-center">
+                                <input {...register('propertyType.commercial')} type="checkbox" className="mr-2 checkbox" />
+                                <label className="text-sm font-medium text-gray-700">Commercial</label>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Property Summary */}

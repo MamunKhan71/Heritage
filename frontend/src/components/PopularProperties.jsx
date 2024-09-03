@@ -17,7 +17,7 @@ const PopularProperties = ({ title }) => {
             </div>
             <div className='mt-12 grid grid-cols-3 gap-4 w-full'>
                 {
-                    property.map(prop => <PropertyContainer id={prop._id} title={prop.propertyDetails.title} price={prop.propertyDetails.price} image={prop.propertyDetails.mainImage} location={prop.propertyDetails.location} />)
+                    property.map(prop => <PropertyContainer id={prop._id} title={prop.propertyDetails.title} price={prop.propertyDetails.price} image={prop.propertyDetails.mainImage} location={prop.propertyDetails.location} status={prop.propertySummary?.status} type={prop.propertySummary.type} />)
                 }
             </div>
         </div>

@@ -13,7 +13,7 @@ const PropertyContainer = ({ id, title, image, type, status, location, price }) 
                 <div className="card-body">
                     <div className='flex justify-between items-center w-full'>
                         <button className='btn btn-xs rounded-none text-black bg-[#C5E2FF]'>{type}</button>
-                        <p className='font-semibold w-full text-right'>🟨 {status}</p>
+                        <p className='font-semibold w-full text-right'>{status}</p>
                     </div>
                     <hr />
                     <h2 className="card-title">{title}</h2>
