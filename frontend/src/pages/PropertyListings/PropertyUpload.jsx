@@ -10,7 +10,7 @@ import { UploadCloud } from "lucide-react";
 const PropertyUpload = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, reset } = useForm();
-    const { user } = useContext(AuthContext); // Assuming you have user context to check authentication
+    const { user } = useContext(AuthContext); 
 
     const onSubmit = (data) => {
         const propertyData = {
@@ -18,18 +18,28 @@ const PropertyUpload = () => {
                 title: data.title,
                 location: data.location,
                 price: parseInt(data.price),
-                size: parseInt(data.size),
-                bedrooms: parseInt(data.bedrooms),
-                bathrooms: parseInt(data.bathrooms),
-                status: data.status,
-                type: data.type,
-                description: data.description
+                mainImage: data.mainImage,
+                imageGallery: data.imageGallery.split(','),
+                valueRange: {
+                    min: parseInt(data.valueRange.min),
+                    max: parseInt(data.valueRange.max),
+                    currentBid: data.valueRange.currentBid
+                },
+                overview: data.overview.split(','), 
+            },
+            propertySummary: {
+                type: data.propertySummary.type,
+                status: data.propertySummary.status,
+                title: data.propertySummary.title,
+                price: parseInt(data.propertySummary.price)
             },
             owner: {
-                name: user.displayName, // Assuming user context provides displayName
-                email: user.email // Assuming user context provides email
+                name: user?.displayName,
+                email: user?.email
             }
         };
+
+        console.log(propertyData);
 
         // Post the propertyData to the backend (assuming the backend API exists)
         // fetch('https://your-api-endpoint/properties', {

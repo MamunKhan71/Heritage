@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../provider/AuthProvider";
 import { Eye, EyeOffIcon, GithubIcon, ScanEye, ScanEyeIcon } from "lucide-react";
+import axios from "axios";
 
 const Register = () => {
     const { createNewUser, googleSignUp, gitHubSignIn, updateUserProfile, logout, user } = useContext(AuthContext)
@@ -42,6 +43,10 @@ const Register = () => {
                         .then(() => setLogStatus('User Created Successfully!', {
                             style: { background: '#181A20', color: 'white' }
                         }))
+                        .then(() => {
+                            axios.post("http://localhost:5000/users", { name, email, photoUrl })
+                                .then(res => console.log(res.data))
+                        })
                         .then(logout())
                         .then(toast.info("Account Created, Please Login!"))
                         .then(navigate('/login'))
@@ -67,6 +72,8 @@ const Register = () => {
             setLogStatus('User Created Successfully!', {
                 style: { background: '#181A20', color: 'white' }
             });
+            await axios.post("http://localhost:5000/users", { name, email, photoUrl })
+                .then(res => console.log(res.data))
             await logout();
             toast.info("Account Created, Please Login!");
             navigate('/login');
@@ -80,6 +87,8 @@ const Register = () => {
             setLogStatus('User Created Successfully!', {
                 style: { background: '#181A20', color: 'white' }
             });
+            await axios.post("http://localhost:5000/users", { name, email, photoUrl })
+                .then(res => console.log(res.data))
             await logout();
             toast.info("Account Created, Please Login!");
             navigate('/login');
