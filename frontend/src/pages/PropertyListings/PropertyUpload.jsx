@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import 'animate.css';
 import { Helmet } from "react-helmet";
+import { UploadCloud } from "lucide-react";
 
 const PropertyUpload = () => {
     const navigate = useNavigate();
@@ -54,33 +55,83 @@ const PropertyUpload = () => {
             </Helmet>
             <div className="animate__animated animate__fadeIn">
                 <h1 className="text-primary text-3xl font-semibold mb-6 text-center">Upload Property</h1>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full border p-4">
-                    <div className="flex flex-col gap-4 w-full">
-                        <input {...register('title')} type="text" placeholder="Property Title" className="input bg-[#F5F9FE] w-full p-4 rounded-none" required />
-                        <input {...register('image')} type="text" placeholder="Property Image Url" className="input bg-[#F5F9FE] w-full p-4 rounded-none" required />
-                        <input {...register('location')} type="text" placeholder="Location" className="input bg-[#F5F9FE] w-full p-4 rounded-none" required />
-                        <input {...register('price')} type="number" placeholder="Price" className="input bg-[#F5F9FE] w-full p-4 rounded-none" required />
-                        <input {...register('size')} type="number" placeholder="Size (sq ft)" className="input bg-[#F5F9FE] w-full p-4 rounded-none" required />
-                        <input {...register('bedrooms')} type="number" placeholder="Bedrooms" className="input bg-[#F5F9FE] w-full p-4 rounded-none" required />
-                        <input {...register('bathrooms')} type="number" placeholder="Bathrooms" className="input bg-[#F5F9FE] w-full p-4 rounded-none" required />
-                        <select {...register('type')} className="input bg-[#F5F9FE] w-full p-4 rounded-none" required>
-                            <option value="">Select Property Type</option>
-                            <option value="Apartment">Apartment</option>
-                            <option value="Villa">Villa</option>
-                            <option value="Commercial">Commercial</option>
-                        </select>
-                        <select {...register('status')} className="input bg-[#F5F9FE] w-full p-4 rounded-none" required>
-                            <option value="">Select Property Status</option>
-                            <option value="Ready to Move">Ready to Move</option>
-                            <option value="Under Construction">Under Construction</option>
-                        </select>
-                        <textarea {...register('description')} placeholder="Property Description" className="input bg-[#F5F9FE] w-full p-4 rounded-none" rows="4" required></textarea>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    {/* Property Title */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Property Title</label>
+                        <input {...register('title')} type="text" placeholder="Property Title" className="input w-full p-3 rounded-none border border-gray-300" />
                     </div>
-                    <div className="w-full">
-                        <button type="submit" className="hover:cursor-pointer w-full relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-primary text-white hover:bg-primary group">
-                            <span className="w-48 h-48 rotate-[-40deg] bg-purple-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
-                            <span className="text-center relative w-full transition-colors duration-300 ease-in-out text-white group-hover:text-white">Upload Property</span>
-                        </button>
+
+                    {/* Location */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Location</label>
+                        <input {...register('location')} type="text" placeholder="Location" className="input w-full p-3 rounded-none border border-gray-300" />
+                    </div>
+
+                    {/* Price */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Price</label>
+                        <input {...register('price')} type="number" placeholder="Price" className="input w-full p-3 rounded-none border border-gray-300" />
+                    </div>
+
+                    {/* Main Image */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Main Image URL</label>
+                        <input {...register('mainImage')} type="text" placeholder="Main Image URL" className="input w-full p-3 rounded-none border border-gray-300" />
+                    </div>
+
+                    {/* Image Gallery */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Image Gallery URLs (Comma Separated)</label>
+                        <input {...register('imageGallery')} type="text" placeholder="Image Gallery URLs" className="input w-full p-3 rounded-none border border-gray-300" />
+                    </div>
+
+                    {/* Value Range */}
+                    <div className="grid grid-cols-3 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Min Value</label>
+                            <input {...register('valueRange.min')} type="number" placeholder="Min Value" className="input w-full p-3 rounded-none border border-gray-300" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Max Value</label>
+                            <input {...register('valueRange.max')} type="number" placeholder="Max Value" className="input w-full p-3 rounded-none border border-gray-300" />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Current Bid</label>
+                            <input {...register('valueRange.currentBid')} type="text" placeholder="Current Bid" className="input w-full p-3 rounded-none border border-gray-300" />
+                        </div>
+                    </div>
+
+                    {/* Overview */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Overview (Comma Separated)</label>
+                        <textarea {...register('overview')} placeholder="Overview (e.g., Power Back Up, Lift, Gymnasium, etc.)" className="textarea w-full p-3 rounded-none border border-gray-300"></textarea>
+                    </div>
+
+                    {/* Property Summary */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Property Type</label>
+                        <input {...register('propertySummary.type')} type="text" placeholder="Type (e.g., Apartment)" className="input w-full p-3 rounded-none border border-gray-300" />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Status</label>
+                        <input {...register('propertySummary.status')} type="text" placeholder="Status (e.g., Ready to Move)" className="input w-full p-3 rounded-none border border-gray-300" />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Property Summary Title</label>
+                        <input {...register('propertySummary.title')} type="text" placeholder="Summary Title" className="input w-full p-3 rounded-none border border-gray-300" />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Summary Price</label>
+                        <input {...register('propertySummary.price')} type="number" placeholder="Summary Price" className="input w-full p-3 rounded-none border border-gray-300" />
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className="flex items-center justify-center w-full">
+                        <button type="submit" className="w-full text-center px-4 py-2 bg-primary text-white rounded-none inline-flex items-center justify-center gap-2">Upload Property<UploadCloud /> </button>
                     </div>
                 </form>
             </div>
