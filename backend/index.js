@@ -29,6 +29,7 @@ async function run() {
         const db = client.db("Heritage")
         const propertyCollection = db.collection('properties')
         const reviewCollection = db.collection('reviews')
+        const teamCollection = db.collection('teams')
         app.get('/properties', async (req, res) => {
             const properties = await propertyCollection.find().project({ "propertyDetails.price": 1, "propertyDetails.title": 1, "propertyDetails.location": 1, "propertyDetails.mainImage": 1, "propertySummary.status": 1, "propertySummary.type": 1 }).toArray()
             res.send(properties);
@@ -65,12 +66,15 @@ async function run() {
                     text,
                     propertyId: propertyID
                 }
-                console.log(cursor);
                 const newReview = await reviewCollection.insertOne(cursor)
                 res.status(200).send(newReview)
                 // res.status(200).send({ message: "Success!" })
             } catch (error) {
             }
+        })
+        app.get('/teams', async (req, res) => {
+            const result = await teamCollection.find().toArray()
+            res.send(result)
         })
 
     } finally {
