@@ -1,11 +1,13 @@
-import { BathIcon, Bed, BedDouble, BlendIcon, LucideFullscreen, MapPin } from 'lucide-react'
+import { BathIcon, Battery, Bed, BedDouble, BlendIcon, DownloadCloud, GlassWater, House, ListFilter, Lock, LucideFullscreen, MapPin, ParkingCircle, ParkingCircleOff, PersonStanding, SchoolIcon } from 'lucide-react'
 import React from 'react'
+import Services from '../Home/Services'
+import PopularProperties from '../../components/PopularProperties'
 
 const PropertyDetails = () => {
     return (
         <div className='space-y-6'>
             <div>
-                <div className='flex  gap-6'>
+                <div className='flex gap-6'>
                     <div>
                         <h1 className='font-bold text-xl'>3 BHK Builder Floor for Sale in Site Ram Bazar Hyderabad</h1>
                         <p className='inline-flex items-center gap-2'><MapPin size={20} color='#EE6611' /> Meadshowire Park, Greenfield, USA</p>
@@ -73,6 +75,40 @@ const PropertyDetails = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className='bg-[#F9FAFB] space-y-8 p-6 rounded-lg border border-[#E5E7EB]'>
+                <h1 className='font-semibold text-lg'>Overview</h1>
+                <div className='grid grid-cols-4 gap-6 text-sm'>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Power Back Up</p>
+                    <p className='flex gap-2 font-semibold'><ListFilter className='bg-white rounded-lg size-6' /> Lift</p>
+                    <p className='flex gap-2 font-semibold'><House className='bg-white rounded-lg size-6' /> Club House</p>
+                    <p className='flex gap-2 font-semibold'><PersonStanding className='bg-white rounded-lg size-6' /> Gymnesium</p>
+                    <p className='flex gap-2 font-semibold'><ParkingCircle className='bg-white rounded-lg size-6' /> Park</p>
+                    <p className='flex gap-2 font-semibold'><ParkingCircleOff className='bg-white rounded-lg size-6' /> Reserved Parking</p>
+                    <p className='flex gap-2 font-semibold'><Lock className='bg-white rounded-lg size-6' /> Security</p>
+                    <p className='flex gap-2 font-semibold'><GlassWater className='bg-white rounded-lg size-6' /> Water Storage</p>
+                    <p className='flex gap-2 font-semibold'><SchoolIcon className='bg-white rounded-lg size-6' /> Private Terrace/Garden </p>
+                    <p className='flex gap-2 font-semibold'><DownloadCloud className='bg-white rounded-lg size-6' /> Vaatsu Complaint </p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Services/Goods Lift</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Visitor Parking</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Intercom Facility</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Maintenance Staff</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Waste Disposal</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Laundry Service</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Internet/Wifi Connectivity</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> DTH Television Facility</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Piped Gas</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Jogging and Strolling Track</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Outdoor Tennis Courts</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Early Learning Centre</p>
+                    <p className='flex gap-2 font-semibold'><Battery className='bg-white rounded-lg size-6' /> Kids Play Area</p>
+                </div>
+            </div>
+            <div className='pb-24'>
+                <Services />
+            </div>
+            <div>
+                <PopularProperties />
             </div>
         </div>
     )
