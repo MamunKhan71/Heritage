@@ -159,7 +159,7 @@ const AllProperties = () => {
             <div className='mt-20'>
                 <PopularProperties />
             </div>
-            <div className='mt-20'>
+            <div className='mt-20 w-full'>
                 <Testimonials />
             </div>
 
