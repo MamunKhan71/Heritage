@@ -2,6 +2,8 @@ import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { ArrowDownCircle, DollarSign, MapPinned, PinIcon, Search } from 'lucide-react'
+import PopularProperties from '../../components/PopularProperties';
+import Testimonials from '../../components/Testimonials';
 const AllProperties = () => {
     return (
         <div>
@@ -122,6 +124,7 @@ const AllProperties = () => {
                     </Tabs>
                 </div>
             </div>
+            {/* second section */}
             <div className='mt-48 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4'>
                 <div className='bg-[#FDF0E7] p-2 lg:p-4 space-y-8'>
                     <div>
@@ -152,6 +155,14 @@ const AllProperties = () => {
                     <span className='flex items-center gap-2 justify-between underline text-[#0051A1]'> View all <ArrowDownCircle /></span>
                 </div>
             </div>
+            {/* second section end*/}
+            <div className='mt-20'>
+                <PopularProperties />
+            </div>
+            <div className='mt-20'>
+                <Testimonials />
+            </div>
+
         </div>
     )
 }
