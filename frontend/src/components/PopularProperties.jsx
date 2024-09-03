@@ -1,15 +1,25 @@
 import { LocateIcon, MapPin, Square } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropertyContainer from './PropertyContainer'
+import axios from 'axios'
 
-const PopularProperties = () => {
+const PopularProperties = ({ title }) => {
+    const [property, setProperty] = useState([])
+    useEffect(() => {
+        axios.get('http://localhost:5000/properties')
+            .then(res => setProperty(res.data))
+    }, [])
     return (
         <div>
             <div className='flex items-center justify-between'>
-                <h1 className='text-4xl font-bold'>Popular Properties</h1>
+                <h1 className='text-4xl font-bold'>{title}</h1>
                 <p className='underline text-[#0051A1] font-bold'>See all property</p>
             </div>
-            <PropertyContainer />
+            <div className='mt-12 grid grid-cols-3 gap-4 w-full'>
+                {
+                    property.map(prop => <PropertyContainer id={prop._id} title={prop.propertyDetails.title} price={prop.propertyDetails.price} image={prop.propertyDetails.mainImage} location={prop.propertyDetails.location} />)
+                }
+            </div>
         </div>
     )
 }

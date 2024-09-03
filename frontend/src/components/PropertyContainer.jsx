@@ -1,61 +1,27 @@
 import { MapPin } from 'lucide-react'
-import React from 'react'
-
-const PropertyContainer = () => {
+import { Link } from 'react-router-dom'
+const PropertyContainer = ({ id, title, image, type, status, location, price }) => {
     return (
-        <div className='mt-12 grid grid-cols-3 gap-4 w-full'>
+        <Link to={`/properties/${id}`}>
             <div className="card card-compact rounded-none bg-[#F9FAFB]">
                 <figure>
                     <img
-                        src="cardImage.jpg"
-                        alt="Shoes" />
+                        className='h-72 w-full object-cover'
+                        src={`${image}`}
+                        alt={title} />
                 </figure>
                 <div className="card-body">
                     <div className='flex justify-between items-center w-full'>
-                        <button className='btn btn-xs rounded-none text-black bg-[#C5E2FF]'>Apartment</button>
-                        <p className='font-semibold w-full text-right'>🟨 Ready to Move</p>
+                        <button className='btn btn-xs rounded-none text-black bg-[#C5E2FF]'>{type}</button>
+                        <p className='font-semibold w-full text-right'>🟨 {status}</p>
                     </div>
                     <hr />
-                    <h2 className="card-title">SunnySlope Suites</h2>
-                    <p className='inline-flex items-center gap-2'><MapPin size={20} color='#EE6611' /> Meadshowire Park, Greenfield, USA</p>
-                    <p className='font-bold text-2xl'>$ 250000</p>
+                    <h2 className="card-title">{title}</h2>
+                    <p className='inline-flex items-center gap-2'><MapPin size={20} color='#EE6611' /> {location}</p>
+                    <p className='font-bold text-2xl'>$ {price}</p>
                 </div>
             </div>
-            <div className="card card-compact rounded-none bg-[#F9FAFB]">
-                <figure>
-                    <img
-                        src="cardImage.jpg"
-                        alt="Shoes" />
-                </figure>
-                <div className="card-body">
-                    <div className='flex justify-between items-center w-full'>
-                        <button className='btn btn-xs rounded-none text-black bg-[#C5E2FF]'>Apartment</button>
-                        <p className='font-semibold w-full text-right'>🟨 Ready to Move</p>
-                    </div>
-                    <hr />
-                    <h2 className="card-title">SunnySlope Suites</h2>
-                    <p className='inline-flex items-center gap-2'><MapPin size={20} color='#EE6611' /> Meadshowire Park, Greenfield, USA</p>
-                    <p className='font-bold text-2xl'>$ 250000</p>
-                </div>
-            </div>
-            <div className="card card-compact rounded-none bg-[#F9FAFB]">
-                <figure>
-                    <img
-                        src="cardImage.jpg"
-                        alt="Shoes" />
-                </figure>
-                <div className="card-body">
-                    <div className='flex justify-between items-center w-full'>
-                        <button className='btn btn-xs rounded-none text-black bg-[#C5E2FF]'>Apartment</button>
-                        <p className='font-semibold w-full text-right'>🟨 Ready to Move</p>
-                    </div>
-                    <hr />
-                    <h2 className="card-title">SunnySlope Suites</h2>
-                    <p className='inline-flex items-center gap-2'><MapPin size={20} color='#EE6611' /> Meadshowire Park, Greenfield, USA</p>
-                    <p className='font-bold text-2xl'>$ 250000</p>
-                </div>
-            </div>
-        </div>
+        </Link>
     )
 }
 

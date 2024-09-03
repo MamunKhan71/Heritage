@@ -6,6 +6,8 @@ import AllProperties from '../pages/PropertyListings/AllProperties';
 import PropertySearch from '../pages/PropertyListings/PropertySearch';
 import PropertyDetails from '../pages/PropertyListings/PropertyDetails';
 import AboutPage from '../pages/About/AboutPage';
+import Register from '../pages/Authentication/Register';
+import Login from '../pages/Authentication/Login';
 
 const router = createBrowserRouter([
     {
@@ -25,12 +27,20 @@ const router = createBrowserRouter([
                 element: <PropertySearch />
             },
             {
-                path: '/property-details',
+                path: '/properties/:id',
                 element: <PropertyDetails />
             },
             {
                 path: '/about',
                 element: <AboutPage />
+            },
+            {
+                path: '/register',
+                element: <Register />
+            },
+            {
+                path: '/login',
+                element: <Login />
             }
         ]
     },

@@ -131,15 +131,14 @@ const AllProperties = () => {
             </div>
             {/* second section end*/}
             <div className='mt-20'>
-                <PopularProperties />
+                <PopularProperties title={"Popular Properties"} />
             </div>
             <div className='mt-20'>
-                <PopularProperties />
+                <PopularProperties title={"New Listed Properties"} />
             </div>
             <div className='mt-20 w-full'>
                 <Testimonials />
             </div>
-
         </div>
     )
 }

@@ -8,6 +8,9 @@ export default {
     extend: {
       fontFamily: {
         'primary': ["Montserrat", "sans-serif"]
+      },
+      colors: {
+        'primary': "#000"
       }
     },
   },
