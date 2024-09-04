@@ -41,18 +41,18 @@ const PropertyDetails = () => {
             userId: user?.uid || null,
             propertyId: id,
             bidderName: user?.displayName || 'Anonymous',
-            bidAmount: bidAmount,
-            bidLocation: location || 'Unknown'
+            bidAmount: parseInt(maxBid),
+            location: location
         };
         console.log(bidData);
-        // axios.post(`http://localhost:5000/properties/${id}/bid`, bidData)
-        //     .then(res => {
-        //         window.location.reload();
-        //     })
-        //     .catch(error => {
-        //         console.error('Error placing bid:', error);
-        //         setBidError('Error placing bid, please try again.');
-        //     });
+        axios.patch(`http://localhost:5000/properties/${id}/bid`, bidData)
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error placing bid:', error);
+                setBidError('Error placing bid, please try again.');
+            });
     };
 
     const handleReview = (event) => {
@@ -140,7 +140,7 @@ const PropertyDetails = () => {
                             <div className="label">
                                 <span className="label-text">Bidding Location</span>
                             </div>
-                            <input type="text" placeholder={`Bidding Location`} onBlur={e => setLocation(e.target.value)} className="input w-full rounded-none" />
+                            <input type="text" placeholder={`Bidding Location`} onChange={e => setLocation(e.target.value)} className="input w-full rounded-none" />
                         </label>
                         <div className="space-y-4">
                             

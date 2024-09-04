@@ -79,6 +79,49 @@ async function run() {
             } catch (error) {
             }
         })
+        app.patch('/properties/:id/bid', async (req, res) => {
+            const propertyId = req.params.id;
+            const { userId, bidAmount, location, bidderName } = req.body;
+            try {
+                const property = await propertyCollection.findOne({ _id: new ObjectId(propertyId) });
+                console.log(property);
+
+                if (!property) {
+                    return res.status(404).json({ error: 'Property not found' });
+                }
+
+                if (bidAmount < property.propertyDetails.valueRange.min || bidAmount > property.propertyDetails.valueRange.max) {
+                    return res.status(400).json({ error: 'Bid amount is out of range' });
+                }
+
+                if (property.highestBid && bidAmount <= property.highestBid.bidAmount) {
+                    return res.status(400).json({ error: 'Bid amount must be higher than the current highest bid' });
+                }
+
+                const cursor = {
+                    _id: new ObjectId(propertyId)
+                }
+                const query = {
+                    $set: {
+                        'highestBid.userId': userId,
+                        'highestBid.bidAmount': bidAmount,
+                        'highestBid.location': location,
+                        'highestBid.bidderName': bidderName
+                    }
+                }
+
+                const result = await propertyCollection.updateOne(cursor, query, { upsert: true })
+                console.log(result);
+                if (!result) {
+                    res.status(400).json({ message: 'Bid Unsuccessful!' });
+
+                }
+                res.status(200).json({ message: 'Bid placed successfully', highestBid: property.highestBid });
+            } catch (error) {
+                console.error('Error placing bid:', error);
+                res.status(500).json({ error: 'An error occurred while placing the bid' });
+            }
+        });
         app.get('/teams', async (req, res) => {
             const result = await teamCollection.find().toArray()
             res.send(result)
