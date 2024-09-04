@@ -51,7 +51,7 @@ const PropertyUpload = () => {
         };
         console.log(propertyData);
 
-        axios.post('http://localhost:5000/add-property', propertyData)
+        axios.post('https://heritage-blond.vercel.app/add-property', propertyData)
             .then(res => console.log(res.data))
     };
 

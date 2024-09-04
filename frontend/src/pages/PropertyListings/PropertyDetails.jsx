@@ -19,14 +19,14 @@ const PropertyDetails = () => {
     const [maxBid, setMaxBid] = useState(0)
     const { id } = useParams()
     useEffect(() => {
-        axios.get(`http://localhost:5000/properties/${id}/reviews`)
+        axios.get(`https://heritage-blond.vercel.app/properties/${id}/reviews`)
             .then(res => {
                 setReviews(res.data || []);
             })
             .catch(error => console.error('Error fetching reviews:', error));
     }, []);
     useEffect(() => {
-        axios.get(`http://localhost:5000/properties/${id}`)
+        axios.get(`https://heritage-blond.vercel.app/properties/${id}`)
             .then(res => setProperty(res.data))
     }, [id])
     const bidHandler = () => {
@@ -45,7 +45,7 @@ const PropertyDetails = () => {
             location: location
         };
         console.log(bidData);
-        axios.patch(`http://localhost:5000/properties/${id}/bid`, bidData)
+        axios.patch(`https://heritage-blond.vercel.app/properties/${id}/bid`, bidData)
             .then(res => {
                 window.location.reload();
             })
@@ -65,7 +65,7 @@ const PropertyDetails = () => {
             text: reviewText
         };
 
-        axios.post(`http://localhost:5000/properties/${id}/reviews`, reviewData)
+        axios.post(`https://heritage-blond.vercel.app/properties/${id}/reviews`, reviewData)
             .then(res => {
                 window.location.reload();
                 setReviewText('');

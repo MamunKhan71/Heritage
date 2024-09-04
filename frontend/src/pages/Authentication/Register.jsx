@@ -44,7 +44,7 @@ const Register = () => {
                             style: { background: '#181A20', color: 'white' }
                         }))
                         .then(() => {
-                            axios.post("http://localhost:5000/users", { name, email, photoUrl })
+                            axios.post("https://heritage-blond.vercel.app/users", { name, email, photoUrl })
                                 .then(res => console.log(res.data))
                         })
                         .then(logout())
@@ -72,7 +72,7 @@ const Register = () => {
             setLogStatus('User Created Successfully!', {
                 style: { background: '#181A20', color: 'white' }
             });
-            await axios.post("http://localhost:5000/users", { name, email, photoUrl })
+            await axios.post("https://heritage-blond.vercel.app/users", { name, email, photoUrl })
                 .then(res => console.log(res.data))
             await logout();
             toast.info("Account Created, Please Login!");
@@ -87,7 +87,7 @@ const Register = () => {
             setLogStatus('User Created Successfully!', {
                 style: { background: '#181A20', color: 'white' }
             });
-            await axios.post("http://localhost:5000/users", { name, email, photoUrl })
+            await axios.post("https://heritage-blond.vercel.app/users", { name, email, photoUrl })
                 .then(res => console.log(res.data))
             await logout();
             toast.info("Account Created, Please Login!");

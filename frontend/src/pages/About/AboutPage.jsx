@@ -6,7 +6,7 @@ import axios from 'axios'
 const AboutPage = () => {
     const [teams, setTeams] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000/teams')
+        axios.get('https://heritage-blond.vercel.app/teams')
             .then(res => setTeams(res.data))
     }, [])
     return (

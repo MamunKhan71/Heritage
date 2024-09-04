@@ -11,7 +11,7 @@ const PropertySearch = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await axios.post('http://localhost:5000/filter-property', searchCriteria);
+                const response = await axios.post('https://heritage-blond.vercel.app/filter-property', searchCriteria);
                 setProperties(response.data);
             } catch (error) {
                 console.error("Error fetching properties:", error);

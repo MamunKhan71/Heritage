@@ -6,7 +6,7 @@ import axios from 'axios'
 const PopularProperties = ({ title }) => {
     const [property, setProperty] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000/properties')
+        axios.get('https://heritage-blond.vercel.app/properties')
             .then(res => setProperty(res.data))
     }, [])
     return (

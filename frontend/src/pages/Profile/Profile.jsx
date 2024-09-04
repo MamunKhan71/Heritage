@@ -8,7 +8,7 @@ const Profile = () => {
     const { logout, user } = useContext(AuthContext)
     const [property, setProperty] = useState([])
     useEffect(() => {
-        axios.get(`http://localhost:5000/my-bids/${user?.uid}`)
+        axios.get(`https://heritage-blond.vercel.app/my-bids/${user?.uid}`)
             .then(res => setProperty(res.data))
     }, [user])
     return (
