@@ -30,6 +30,13 @@ async function run() {
         const propertyCollection = db.collection('properties')
         const reviewCollection = db.collection('reviews')
         const teamCollection = db.collection('teams')
+        const userCollection = db.collection('users')
+        app.post('/users', async (req, res) => {
+            const newUser = req.body;
+            newUser.createdAt = new Date()
+            newUser.lastLogin = new Date()
+            const result = userCollection.insertOne(newUser)
+        })
         app.get('/properties', async (req, res) => {
             const properties = await propertyCollection.find().project({ "propertyDetails.price": 1, "propertyDetails.title": 1, "propertyDetails.location": 1, "propertyDetails.mainImage": 1, "propertySummary.status": 1, "propertySummary.type": 1 }).toArray()
             res.send(properties);

@@ -12,6 +12,11 @@ const PropertyDetails = () => {
     const [reviews, setReviews] = useState([]);
     const [rating, setRating] = useState(0);
     const [reviewText, setReviewText] = useState('');
+    const [location, setLocation] = useState('')
+    const [bidAmount, setBidAmount] = useState(0);
+    const [bidError, setBidError] = useState('');
+    const [minBid, setMinBid] = useState(0)
+    const [maxBid, setMaxBid] = useState(0)
     const { id } = useParams()
     useEffect(() => {
         axios.get(`http://localhost:5000/properties/${id}/reviews`)
@@ -24,6 +29,31 @@ const PropertyDetails = () => {
         axios.get(`http://localhost:5000/properties/${id}`)
             .then(res => setProperty(res.data))
     }, [id])
+    const bidHandler = () => {
+        const propertyMinBid = property.propertyDetails?.valueRange?.min;
+        const propertyMaxBid = property.propertyDetails?.valueRange?.max;
+        if (minBid < propertyMinBid || maxBid > propertyMaxBid) {
+            setBidError(`Bid must be between $${propertyMinBid} and $${propertyMaxBid}`);
+            return;
+        }
+        setBidError(``);
+        const bidData = {
+            userId: user?.uid || null,
+            propertyId: id,
+            bidderName: user?.displayName || 'Anonymous',
+            bidAmount: bidAmount,
+            bidLocation: location || 'Unknown'
+        };
+        console.log(bidData);
+        // axios.post(`http://localhost:5000/properties/${id}/bid`, bidData)
+        //     .then(res => {
+        //         window.location.reload();
+        //     })
+        //     .catch(error => {
+        //         console.error('Error placing bid:', error);
+        //         setBidError('Error placing bid, please try again.');
+        //     });
+    };
 
     const handleReview = (event) => {
         event.preventDefault();
@@ -43,6 +73,7 @@ const PropertyDetails = () => {
             })
             .catch(error => console.error('Error submitting review:', error));
     };
+    console.log(minBid, maxBid);
     return (
         <div className='space-y-6'>
             <div>
@@ -71,8 +102,14 @@ const PropertyDetails = () => {
                         <h1 className='text-white font-semibold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>View More</h1>
                     </div>
                 </div>
-                <div className='basis-96 bg-[#ECF5FF] p-4 space-y-4'>
-                    <p>Property Value</p>
+                <div className='basis-96 bg-[#ECF5FF] p-4 space-y-4 rounded-lg'>
+                    <div className='bg-white p-4 rounded-lg'>
+                        <p className='font-bold text-lg'>Current Highest Bid</p>
+                        <p className='text-xl font-semibold'>$ {property?.highestBid?.bidAmount}</p>
+                        <p>Bidder: {property?.highestBid?.bidderName}</p>
+                        <p>Location: {property?.highestBid?.location}</p>
+                    </div>
+                    <p className='font-bold'>Property Value</p>
                     <p className='font-bold text-xl'>$ {property.propertyDetails?.valueRange?.min} -  {property.propertyDetails?.valueRange?.max} </p>
                     <p>Your bid can not be than 10% of the
                         property Minimum value.</p>
@@ -81,25 +118,73 @@ const PropertyDetails = () => {
                             <div className="label">
                                 <span className="label-text">Min</span>
                             </div>
-                            <input type="text" placeholder={`$ ${property.propertyDetails?.valueRange?.min}`} className="input w-full rounded-none" />
+                            <input
+                                onChange={(e) => setMinBid(e.target.value)}
+                                type="text"
+                                placeholder={`$ ${property.propertyDetails?.valueRange?.min}`}
+                                className="input w-full rounded-none"
+                            />
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Max</span>
                             </div>
-                            <input type="text" placeholder={`$ ${property.propertyDetails?.valueRange?.max}`} className="input w-full rounded-none" />
+                            <input
+                                onChange={(e) => setMaxBid(e.target.value)}
+                                type="text"
+                                placeholder={`$ ${property.propertyDetails?.valueRange?.max}`}
+                                className="input w-full rounded-none"
+                            />
                         </label>
-                        <div>
-                            <input type="range" min={property.propertyDetails?.valueRange?.min} max={property.propertyDetails?.valueRange?.max} value={property.propertyDetails?.valueRange?.min} className="range" step="1000" />
-                            <div className="flex w-full justify-between px-2 text-xs">
-                                <span>$ {property.propertyDetails?.valueRange?.min}</span>
-                                <span>$ {property.propertyDetails?.valueRange?.max}</span>
+                        <label className="form-control w-full">
+                            <div className="label">
+                                <span className="label-text">Bidding Location</span>
+                            </div>
+                            <input type="text" placeholder={`Bidding Location`} onBlur={e => setLocation(e.target.value)} className="input w-full rounded-none" />
+                        </label>
+                        <div className="space-y-4">
+                            
+                            <div>
+                                <input
+                                    type="range"
+                                    min={0}
+                                    max={property.propertyDetails?.valueRange?.max}
+                                    value={maxBid}
+                                    // onChange={(e) => setMaxBid(e.target.value)}
+                                    className="range"
+                                    step="1000"
+                                    readOnly
+                                />
+                                <div className="flex w-full justify-between px-2 text-xs">
+                                    <span>${0}</span>
+                                    <span>${property.propertyDetails?.valueRange?.max}</span>
+                                </div>
                             </div>
                         </div>
+                        {bidError && <p className="text-red-500">{bidError}</p>}
+                        <div className='w-full flex items-center justify-center'>
+                            <button onClick={bidHandler} className="btn bg-[#0059B1] text-center border-none rounded-none text-white">Bid Property</button>
+                        </div>
                     </div>
-                    <div className='w-full flex items-center justify-center '>
-                        <button className="btn bg-[#0059B1] text-center border-none rounded-none text-white">Bid Property</button>
-                    </div>
+                    {/* <div className='w-full flex items-center justify-center '>
+                        <button onClick={() => } className="btn bg-[#0059B1] text-center border-none rounded-none text-white">Bid Property</button>
+                        <dialog id="confirmation" className="modal">
+                            <div className="modal-box w-auto rounded-none">
+                                <h3 className="font-bold text-lg text-primary">Are you sure want to logout?</h3>
+                                <div className="modal-action justify-center">
+                                    <form method="dialog">
+                                        <div className='flex flex-col gap-4 items-center justify-center'>
+                                            <input type="text" placeholder={`Bidding Location`} onBlur={e => setLocation(e.target.value)} className="input w-full rounded-none" />
+                                            <div className="flex gap-4">
+                                                <button className="btn rounded-none bg-primary text-white" >Place Bid</button>
+                                                <button className="btn rounded-none">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </dialog>
+                    </div> */}
                 </div>
             </div>
             {/* overview */}
