@@ -8,7 +8,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = process.env.DB_URI;
 
 app.use(cors({
-    origin: ["http://localhost:5173"]
+    origin: ["http://localhost:5173", "https://bistroboss-ddefc.firebaseapp.com", "https://bistroboss-ddefc.web.app"],
 }))
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -42,10 +42,10 @@ const buildFilter = (criteria) => {
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
+        // await client.connect();
         // Send a ping to confirm a successful connection
-        await client.db("admin").command({ ping: 1 });
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+        // await client.db("admin").command({ ping: 1 });
+        // console.log("Pinged your deployment. You successfully connected to MongoDB!");
         const db = client.db("Heritage")
         const propertyCollection = db.collection('properties')
         const reviewCollection = db.collection('reviews')
