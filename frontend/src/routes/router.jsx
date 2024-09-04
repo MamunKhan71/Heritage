@@ -9,6 +9,7 @@ import AboutPage from '../pages/About/AboutPage';
 import Register from '../pages/Authentication/Register';
 import Login from '../pages/Authentication/Login';
 import PropertyUpload from '../pages/PropertyListings/PropertyUpload';
+import Profile from '../pages/Profile/Profile';
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: '/property-upload',
                 element: <PropertyUpload />
+            },
+            {
+                path: '/profile',
+                element: <Profile />
             }
         ]
     },

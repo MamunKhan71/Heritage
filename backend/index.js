@@ -103,6 +103,7 @@ async function run() {
                 }
                 const query = {
                     $set: {
+                        'propertyDetails.valueRange.min': bidAmount,
                         'highestBid.userId': userId,
                         'highestBid.bidAmount': bidAmount,
                         'highestBid.location': location,
@@ -122,6 +123,11 @@ async function run() {
                 res.status(500).json({ error: 'An error occurred while placing the bid' });
             }
         });
+        app.get('/my-bids/:id', async (req, res) => {
+            const id = req.params.id
+            const result = await propertyCollection.find({ "highestBid.userId": id }).toArray()
+            res.send(result);
+        })
         app.get('/teams', async (req, res) => {
             const result = await teamCollection.find().toArray()
             res.send(result)
