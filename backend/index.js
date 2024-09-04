@@ -19,6 +19,18 @@ const client = new MongoClient(uri, {
     }
 });
 
+const buildFilter = (criteria) => {
+    const filter = {};
+
+    if (criteria.location) filter['propertyDetails.location'] = criteria.location;
+    if (criteria.propertyCategory) filter['propertySummary.type'] = criteria.propertyCategory;
+    if (criteria.propertyType) filter['propertyType'] = criteria.propertyType; 
+    if (criteria.budget) filter['propertyDetails.price'] = { $gte: criteria.budget };
+    if (criteria.search) filter.$text = { $search: criteria.search };
+
+    return filter;
+};
+
 async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
@@ -31,6 +43,7 @@ async function run() {
         const reviewCollection = db.collection('reviews')
         const teamCollection = db.collection('teams')
         const userCollection = db.collection('users')
+
         app.post('/users', async (req, res) => {
             const newUser = req.body;
             newUser.createdAt = new Date()
@@ -132,9 +145,31 @@ async function run() {
             const result = await teamCollection.find().toArray()
             res.send(result)
         })
-        app.get('/filter-property/:category', async (req, res) => {
-            const result = await propertyCollection.find({ [`propertyType.${req.params.category}`]: true }).toArray()
-            res.status(200).send(result);
+
+        app.post('/filter-property', async (req, res) => {
+            const filter = buildFilter(req.body);
+            console.log(filter);
+            const mongodbAggregation = [
+                {
+                    $match: filter
+                },
+                {
+                    $project: {
+                        _id: 1, // Include specific fields you need
+                        location: 1,
+                        propertyCategory: 1,
+                        propertyType: 1,
+                        budget: 1
+                    }
+                },
+                {
+                    $sort: {
+                        budget: 1 // Example sorting
+                    }
+                }
+            ];
+            const result = await propertyCollection.aggregate(mongodbAggregation).toArray();
+            console.log(result);
         })
 
     } finally {

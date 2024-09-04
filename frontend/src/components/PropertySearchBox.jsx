@@ -12,19 +12,15 @@ const PropertySearchBox = ({ category }) => {
     const navigate = useNavigate()
     const handleSearch = (data) => {
         const newSearchQuery = {
-            search: data.search,
-            budget: data.budget,
-            location: data.location,
-            propertyType: data.propertyType,
-            propertyCategory: category
+            search: data.search || undefined,
+            budget: data.budget || undefined,
+            location: data.location || undefined,
+            propertyType: data.propertyType || undefined,
+            propertyCategory: category || undefined
         }
         setSearchCriteria(newSearchQuery)
         navigate('/property-search', { state: { searchCriteria: newSearchQuery } });
     };
-    useEffect(() => {
-        axios.get(`http://localhost:5000/filter-property/${category}`)
-            .then(res => console.log(res.data))
-    }, [])
     return (
         <form onSubmit={handleSubmit(handleSearch)} className='space-y-4'>
             {/* Search Input */}
