@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../provider/AuthProvider'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 const ManageRentals = () => {
     const [myProperty, setMyProperty] = useState([])
@@ -15,6 +16,9 @@ const ManageRentals = () => {
     console.log(myProperty);
     return (
         <div className='space-y-12 mt-12'>
+            <Helmet>
+                <title>Heritage | Manage Rentals</title>
+            </Helmet>
             <h1 className='font-bold text-xl text-center'>My Listed Properties</h1>
             <div>
                 <div className="overflow-x-auto">
