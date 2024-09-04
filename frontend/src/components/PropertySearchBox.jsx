@@ -38,7 +38,7 @@ const PropertySearchBox = ({ category }) => {
                 <input
                     type="text"
                     className="grow"
-                    placeholder="Search"
+                    placeholder="Search by price, bedrooms, features... "
                     {...register('search')}
                 />
             </label>
