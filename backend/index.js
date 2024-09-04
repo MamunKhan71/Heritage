@@ -132,6 +132,10 @@ async function run() {
             const result = await teamCollection.find().toArray()
             res.send(result)
         })
+        app.get('/filter-property/:category', async (req, res) => {
+            const result = await propertyCollection.find({ [`propertyType.${req.params.category}`]: true }).toArray()
+            res.status(200).send(result);
+        })
 
     } finally {
         // Ensures that the client will close when you finish/error

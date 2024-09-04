@@ -1,8 +1,13 @@
 import { AreaChart, Loader, MapPin, Ruler } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import Testimonials from '../../components/Testimonials'
+import { useLocation } from 'react-router-dom';
 
 const PropertySearch = () => {
+    const location = useLocation();
+    const [properties, setProperties] = useState([])
+    const { searchCriteria } = location.state || {};
+    console.log(searchCriteria);
     return (
         <div className='space-y-6 w-full'>
             <div className='flex items-center gap-4'>
