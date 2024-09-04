@@ -75,7 +75,6 @@ async function run() {
         })
         app.get('/properties/:id/reviews', async (req, res) => {
             const id = req.params.id
-            console.log(id);
             try {
                 const reviews = await reviewCollection.find({ propertyId: id }).toArray();
                 res.send(reviews);
@@ -105,7 +104,6 @@ async function run() {
             const { userId, bidAmount, location, bidderName } = req.body;
             try {
                 const property = await propertyCollection.findOne({ _id: new ObjectId(propertyId) });
-                console.log(property);
 
                 if (!property) {
                     return res.status(404).json({ error: 'Property not found' });
@@ -133,7 +131,6 @@ async function run() {
                 }
 
                 const result = await propertyCollection.updateOne(cursor, query, { upsert: true })
-                console.log(result);
                 if (!result) {
                     res.status(400).json({ message: 'Bid Unsuccessful!' });
 
@@ -156,7 +153,6 @@ async function run() {
 
         app.post('/filter-property', async (req, res) => {
             const filter = buildFilter(req.body);
-            console.log(filter);
             const mongodbAggregation = [
                 {
                     $match: filter
