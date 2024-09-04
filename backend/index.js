@@ -23,8 +23,10 @@ const buildFilter = (criteria) => {
     const filter = {};
 
     if (criteria.location) filter['propertyDetails.location'] = criteria.location;
-    if (criteria.propertyCategory) filter['propertySummary.type'] = criteria.propertyCategory;
-    if (criteria.propertyType) filter['propertyType'] = criteria.propertyType; 
+    if (criteria.propertyCategory) {
+        filter[`propertyType.${criteria.propertyCategory}`] = true;
+    }
+    if (criteria.propertyType) filter['propertySummary.type'] = criteria.propertyType;
     if (criteria.budget) filter['propertyDetails.price'] = { $gte: criteria.budget };
     if (criteria.search) filter.$text = { $search: criteria.search };
 
