@@ -29,7 +29,12 @@ const buildFilter = (criteria) => {
     if (criteria.propertyType) filter['propertySummary.type'] = criteria.propertyType;
     if (criteria.budget) filter['propertyDetails.price'] = { $gte: criteria.budget };
     if (criteria.search) {
-        filter['propertyDetails.title'] = { $regex: criteria.search, $options: 'i' };
+        const search = { $regex: criteria.search, $options: 'i' }
+        filter.$or = [
+            { 'propertyDetails.title': search },
+            { 'propertyDetails.location': search },
+            { 'propertyDetails.overview': search }
+        ]
     }
     return filter;
 };
