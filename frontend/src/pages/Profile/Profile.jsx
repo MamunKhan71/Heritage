@@ -8,9 +8,12 @@ const Profile = () => {
     const { logout, user } = useContext(AuthContext)
     const [property, setProperty] = useState([])
     useEffect(() => {
-        axios.get(`https://heritage-blond.vercel.app/my-bids/${user?.uid}`)
-            .then(res => setProperty(res.data))
-    }, [user])
+        if (user?.uid && user?.email) {
+            axios.get(`http://localhost:5000/my-bids/${user.uid}?email=${user.email}`)
+                .then(res => setProperty(res.data))
+                .catch(err => console.error(err)); // Optional: Add error handling
+        }
+    }, [user]);
     return (
         <div className="w-full flex justify-center items-center h-screen px-4 lg:px-0">
 

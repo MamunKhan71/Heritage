@@ -2,14 +2,24 @@ const express = require('express')
 const cors = require('cors')
 const port = process.env.PORT || 5000
 const app = express()
+const cookieParser = require('cookie-parser')
 require('dotenv').config()
 app.use(express.json())
+app.use(cookieParser())
+const jwt = require('jsonwebtoken')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = process.env.DB_URI;
 
 app.use(cors({
     origin: ["http://localhost:5173", "https://bistroboss-ddefc.firebaseapp.com", "https://bistroboss-ddefc.web.app"],
+    credentials: true
 }))
+
+const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+};
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
     serverApi: {
@@ -51,7 +61,36 @@ async function run() {
         const reviewCollection = db.collection('reviews')
         const teamCollection = db.collection('teams')
         const userCollection = db.collection('users')
+        //jwt
+        const verifyToken = async (req, res, next) => {
+            const token = req.cookies?.token
+            console.log(token);
+            if (!token) {
+                return res.status(401).send({ message: "Unauthorized Access" })
+            }
+            jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
+                if (error) {
+                    return res.status(401).send({ message: "Unauthorized Access" })
+                }
+                req.user = decoded
+            // console.log(decoded);
 
+            })
+            next()
+        }
+        app.post('/jwt', async (req, res) => {
+            const user = req.body
+            const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: '1h' })
+            res
+                .cookie('token', token, cookieOptions)
+                .send({ success: true })
+        })
+        app.post('/logout', async (req, res) => {
+            const user = req.body
+            res
+                .clearCookie("token", { ...cookieOptions, maxAge: 0 })
+                .send({ success: true });
+        })
         app.post('/users', async (req, res) => {
             const newUser = req.body;
             newUser.createdAt = new Date()
@@ -144,7 +183,11 @@ async function run() {
                 res.status(500).json({ error: 'An error occurred while placing the bid' });
             }
         });
-        app.get('/my-bids/:id', async (req, res) => {
+        app.get('/my-bids/:id', verifyToken, async (req, res) => {
+            console.log(req.query.email);
+            if (req.user?.email !== req.query?.email) {
+                return res.status(403).send({ message: "Forbidden Access" })
+            }
             const id = req.params.id
             const result = await propertyCollection.find({ "highestBid.userId": id }).toArray()
             res.send(result);
