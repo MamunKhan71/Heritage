@@ -32,8 +32,8 @@
 
 ## Tech Stack
 
-- **Front-End**: React/Next.js
-- **Back-End**: Express.js, Prisma or Mongoose ODM
+- **Front-End**: React
+- **Back-End**: Express.js
 - **Database**: MongoDB
 
 ## Installation
@@ -76,7 +76,7 @@
 
 ## Submission Method
 
-- **GitHub Repository**: [GitHub](https://github.com/MamunKhan71/Heritage).
+- **GitHub Repository**: [GitHub](https://github.com/MamunKhan71/Heritage)
 - **Live Link**: [Live Link](https://bistroboss-ddefc.web.app/)
 
 ## Contributing
