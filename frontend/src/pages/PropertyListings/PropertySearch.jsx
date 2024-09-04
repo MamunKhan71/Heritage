@@ -9,9 +9,18 @@ const PropertySearch = () => {
     const [properties, setProperties] = useState([])
     const { searchCriteria } = location.state || {};
     useEffect(() => {
-        axios.post(`http://localhost:5000/filter-property`, searchCriteria)
-            .then(res => console.log(res.data))
-    }, [])
+        const fetchProperties = async () => {
+            try {
+                const response = await axios.post('http://localhost:5000/filter-property', searchCriteria);
+                setProperties(response.data);
+            } catch (error) {
+                console.error("Error fetching properties:", error);
+            }
+        };
+
+        fetchProperties();
+    }, [searchCriteria]);
+    console.log(properties);
     return (
         <div className='space-y-6 w-full'>
             <div className='flex items-center gap-4'>
@@ -22,94 +31,56 @@ const PropertySearch = () => {
             <hr />
             <div className='w-full'>
                 <div className='grid grid-cols-1 gap-5'>
-                    <div className='flex gap-12 w-full bg-[#F9FAFB] rounded-lg p-12'>
-                        <img className='w-40 rounded-lg h-48 object-cover' src="secondSection.jpg" alt="" />
-                        <div className='w-full space-y-4'>
-                            <div className='flex items-center justify-between'>
-                                <h2 className='font-bold text-xl'>3 BHK Builder Floor for Sale in Site Ram Bazar
-                                    New Delhi</h2>
-                                <p className='font-bold text-3xl'>$ 300000</p>
-                            </div>
-                            <div className='flex items-center justify-between'>
-                                <p className='inline-flex items-center gap-2'><MapPin size={20} color='#EE6611' /> Meadshowire Park, Greenfield, USA</p>
-                                <Link to={`/properties/${properties._id}`}><button className='btn border border-black text-lg bg-transparent'>Bid Property</button></Link>
-                            </div>
-                            <div className='flex gap-4 items-center w-full'>
-                                <p className='font-semibold' >Property details</p>
-                                <hr className='w-full flex-1 border-[1.5px]' />
-                            </div>
-                            <div className='flex justify-between items-center'>
-                                <div className='flex gap-2 items-center'>
-                                    <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
-                                        <Loader />
+                    {
+                        properties?.map(property => (
+                            <div className='flex gap-12 w-full bg-[#F9FAFB] rounded-lg p-12'>
+                                <img className='w-40 rounded-lg h-48 object-cover' src="secondSection.jpg" alt="" />
+                                <div className='w-full space-y-4'>
+                                    <div className='flex items-center justify-between'>
+                                        <h2 className='font-bold text-xl'>{property?.propertyDetails?.title}</h2>
+                                        <p className='font-bold text-3xl'>$ {property?.propertyDetails?.price}</p>
                                     </div>
-                                    <div>
-                                        <p className='font-semibold'>Total Area</p>
-                                        <p className='text-[#535353]'>891 sqft</p>
+                                    <div className='flex items-center justify-between'>
+                                        <p className='inline-flex items-center gap-2'><MapPin size={20} color='#EE6611' /> {property?.propertyDetails?.location}</p>
+                                        <Link to={`/properties/${property._id}`}><button className='btn border border-black text-lg bg-transparent'>Bid Property</button></Link>
                                     </div>
-                                </div>
-                                <div className='flex gap-2 items-center'>
-                                    <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
-                                        <AreaChart />
+                                    <div className='flex gap-4 items-center w-full'>
+                                        <p className='font-semibold' >Property details</p>
+                                        <hr className='w-full flex-1 border-[1.5px]' />
                                     </div>
-                                    <div>
-                                        <p className='font-semibold'>Status</p>
-                                        <p className='text-[#535353]'>Ready to move</p>
-                                    </div>
-                                </div>
-                                <div className='flex gap-2 items-center'>
-                                    <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
-                                        <Ruler />
-                                    </div>
-                                    <div>
-                                        <p className='font-semibold'>Total Area</p>
-                                        <p className='text-[#535353]'>891 sqft</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex gap-4 w-full bg-[#F9FAFB] rounded-lg p-4'>
-                        <img className='w-40 rounded-lg h-48 object-cover' src="secondSection.jpg" alt="" />
-                        <div className='w-full '>
-                            <h2>3 BHK Builder Floor for Sale in Site Ram Bazar
-                                New Delhi</h2>
-                            <p className='inline-flex items-center gap-2'><MapPin size={20} color='#EE6611' /> Meadshowire Park, Greenfield, USA</p>
-                            <div className='flex gap-4 items-center w-full'>
-                                <p className='font-semibold' >Property details</p>
-                                <hr className='w-full flex-1 border-[1.5px]' />
-                            </div>
-                            <div className='flex justify-between items-center'>
-                                <div className='flex gap-2 items-center'>
-                                    <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
-                                        <Loader />
-                                    </div>
-                                    <div>
-                                        <p className='font-semibold'>Total Area</p>
-                                        <p className='text-[#535353]'>891 sqft</p>
-                                    </div>
-                                </div>
-                                <div className='flex gap-2 items-center'>
-                                    <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
-                                        <AreaChart />
-                                    </div>
-                                    <div>
-                                        <p className='font-semibold'>Status</p>
-                                        <p className='text-[#535353]'>Ready to move</p>
-                                    </div>
-                                </div>
-                                <div className='flex gap-2 items-center'>
-                                    <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
-                                        <Ruler />
-                                    </div>
-                                    <div>
-                                        <p className='font-semibold'>Total Area</p>
-                                        <p className='text-[#535353]'>891 sqft</p>
+                                    <div className='flex justify-between items-center'>
+                                        <div className='flex gap-2 items-center'>
+                                            <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
+                                                <Loader />
+                                            </div>
+                                            <div>
+                                                <p className='font-semibold'>Total Area</p>
+                                                <p className='text-[#535353]'>{property?.propertyDetails?.totalArea}</p>
+                                            </div>
+                                        </div>
+                                        <div className='flex gap-2 items-center'>
+                                            <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
+                                                <AreaChart />
+                                            </div>
+                                            <div>
+                                                <p className='font-semibold'>Status</p>
+                                                <p className='text-[#535353]'>{property?.propertySummary?.status}</p>
+                                            </div>
+                                        </div>
+                                        <div className='flex gap-2 items-center'>
+                                            <div className='bg-[#EE6611] size-10 flex items-center justify-center text-white rounded-md'>
+                                                <Ruler />
+                                            </div>
+                                            <div>
+                                                <p className='font-semibold'>Property Type</p>
+                                                <p className='text-[#535353]'>{property?.propertySummary?.type}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        ))
+                    }
                 </div>
                 <hr className='mt-6' />
                 <div className='flex items-center gap-4 mt-4'>

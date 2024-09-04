@@ -28,8 +28,9 @@ const buildFilter = (criteria) => {
     }
     if (criteria.propertyType) filter['propertySummary.type'] = criteria.propertyType;
     if (criteria.budget) filter['propertyDetails.price'] = { $gte: criteria.budget };
-    if (criteria.search) filter.$text = { $search: criteria.search };
-
+    if (criteria.search) {
+        filter['propertyDetails.title'] = { $regex: criteria.search, $options: 'i' };
+    }
     return filter;
 };
 
@@ -155,23 +156,23 @@ async function run() {
                 {
                     $match: filter
                 },
-                {
-                    $project: {
-                        _id: 1, // Include specific fields you need
-                        location: 1,
-                        propertyCategory: 1,
-                        propertyType: 1,
-                        budget: 1
-                    }
-                },
-                {
-                    $sort: {
-                        budget: 1 // Example sorting
-                    }
-                }
+                // {
+                //     $project: {
+                //         _id: 1, // Include specific fields you need
+                //         location: 1,
+                //         propertyCategory: 1,
+                //         propertyType: 1,
+                //         budget: 1
+                //     }
+                // },
+                // {
+                //     $sort: {
+                //         budget: 1 // Example sorting
+                //     }
+                // }
             ];
             const result = await propertyCollection.aggregate(mongodbAggregation).toArray();
-            console.log(result);
+            res.send(result);
         })
 
     } finally {
