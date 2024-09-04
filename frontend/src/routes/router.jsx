@@ -10,11 +10,13 @@ import Register from '../pages/Authentication/Register';
 import Login from '../pages/Authentication/Login';
 import PropertyUpload from '../pages/PropertyListings/PropertyUpload';
 import Profile from '../pages/Profile/Profile';
+import NotFoundPage from '../NotFound/NotFoundPage';
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
+        errorElement: <NotFoundPage />,
         children: [
             {
                 path: '/',
@@ -51,7 +53,8 @@ const router = createBrowserRouter([
             {
                 path: '/profile',
                 element: <Profile />
-            }
+            },
+
         ]
     },
 ]);

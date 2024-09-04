@@ -31,6 +31,9 @@ const PropertySearch = () => {
             <hr />
             <div className='w-full'>
                 <div className='grid grid-cols-1 gap-5'>
+                    {!properties.length && <div className='flex items-center justify-center w-full'>
+                        <img src="not.webp" alt="" />
+                    </div>}
                     {
                         properties?.map(property => (
                             <div className='flex gap-12 w-full bg-[#F9FAFB] rounded-lg p-12'>
