@@ -9,7 +9,7 @@ const ManageRentals = () => {
     const { user } = useContext(AuthContext)
     useEffect(() => {
         if (user) {
-            axios.get(`http://localhost:5000/my-properties?email=${user?.email}`)
+            axios.get(`https://heritage-blond.vercel.app/my-properties?email=${user?.email}`)
                 .then(res => setMyProperty(res.data))
         }
     }, [user])
