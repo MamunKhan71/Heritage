@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from 'react-toastify';
+import { Toaster, toast } from 'sonner'
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import 'animate.css';
@@ -49,10 +49,12 @@ const PropertyUpload = () => {
                 commercial: data.propertyType.commercial
             }
         };
-        console.log(propertyData);
 
         axios.post('https://heritage-blond.vercel.app/add-property', propertyData)
-            .then(res => console.log(res.data))
+            .then(res => {
+                toast.success('Property Uploaded Succesfully!')
+            })
+            .catch(() => toast.error('Property Upload Unsuccessful!!'))
     };
 
     return (
@@ -169,6 +171,7 @@ const PropertyUpload = () => {
                     </div>
                 </form>
             </div>
+            <Toaster />
         </div>
     );
 };

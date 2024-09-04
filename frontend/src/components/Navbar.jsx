@@ -26,7 +26,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1 text-lg">
-                    <li><Link to={"#"}>Manage Rentals</Link></li>
+                    <li><Link to={"/manage-rentals"}>Manage Rentals</Link></li>
                     {user ? <>
                         <div className="dropdown dropdown-end">
                             <div data-tip={user.displayName} tabIndex={0} role="button" className="avatar tooltip tooltip-bottom">

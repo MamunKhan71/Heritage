@@ -146,6 +146,12 @@ async function run() {
             const result = await propertyCollection.find({ "highestBid.userId": id }).toArray()
             res.send(result);
         })
+        app.get('/my-properties', async (req, res) => {
+            const query = { "owner.email": req.query.email }
+            const result = await propertyCollection.find(query).toArray()
+            res.send(result)
+
+        })
         app.get('/teams', async (req, res) => {
             const result = await teamCollection.find().toArray()
             res.send(result)

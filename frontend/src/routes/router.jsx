@@ -12,6 +12,7 @@ import PropertyUpload from '../pages/PropertyListings/PropertyUpload';
 import Profile from '../pages/Profile/Profile';
 import NotFoundPage from '../NotFound/NotFoundPage';
 import PropertiesAll from '../Properties/Properties';
+import ManageRentals from '../pages/ManageRentals/ManageRentals';
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path: '/all-properties',
                 element: <PropertiesAll />
+            },
+            {
+                path: '/manage-rentals',
+                element: <ManageRentals />
             }
 
         ]
