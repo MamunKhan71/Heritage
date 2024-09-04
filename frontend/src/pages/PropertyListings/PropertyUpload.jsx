@@ -58,7 +58,7 @@ const PropertyUpload = () => {
     return (
         <div className="w-full lg:w-[600px] mx-auto px-4 lg:px-0 mt-12">
             <Helmet>
-                <title>BDCorporate | Upload Property</title>
+                <title>Heritage | Upload Property</title>
             </Helmet>
             <div className="animate__animated animate__fadeIn">
                 <h1 className="text-primary text-3xl font-semibold mb-6 text-center">Upload Property</h1>

@@ -101,7 +101,7 @@ const Register = () => {
     return (
         <div className="w-full lg:w-96 mx-auto animate__animated animate__fadeIn px-4 lg:px-0 mt-12 lg:mt-28">
             <Helmet>
-                <title>BDCorporate | Register</title>
+                <title>Heritage | Register</title>
             </Helmet>
             <div className="flex items-center justify-center h-auto lg:h-[calc(100dvh-90px)] ">
                 <div className="flex flex-col items-center font-poppins w-full lg:pb-12">

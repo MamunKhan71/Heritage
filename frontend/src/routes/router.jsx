@@ -11,6 +11,7 @@ import Login from '../pages/Authentication/Login';
 import PropertyUpload from '../pages/PropertyListings/PropertyUpload';
 import Profile from '../pages/Profile/Profile';
 import NotFoundPage from '../NotFound/NotFoundPage';
+import PropertiesAll from '../Properties/Properties';
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
                 path: '/profile',
                 element: <Profile />
             },
+            {
+                path: '/all-properties',
+                element: <PropertiesAll />
+            }
 
         ]
     },

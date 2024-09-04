@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import StatCards from '../../components/StatCards'
 import Testimonials from '../../components/Testimonials'
 import axios from 'axios'
+import { Helmet } from 'react-helmet'
 
 const AboutPage = () => {
     const [teams, setTeams] = useState([])
@@ -11,6 +12,9 @@ const AboutPage = () => {
     }, [])
     return (
         <div>
+            <Helmet>
+                <title>Heritage | About Us</title>
+            </Helmet>
             <div className='w-full h-96'>
                 <img className='w-full h-full object-cover' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452007/header_tzskvx.jpg" alt="" />
             </div>

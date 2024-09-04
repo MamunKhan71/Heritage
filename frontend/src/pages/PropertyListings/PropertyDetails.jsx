@@ -5,6 +5,7 @@ import PopularProperties from '../../components/PopularProperties'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { AuthContext } from '../../provider/AuthProvider'
+import { Helmet } from 'react-helmet'
 
 const PropertyDetails = () => {
     const { user } = useContext(AuthContext)
@@ -76,6 +77,9 @@ const PropertyDetails = () => {
     console.log(minBid, maxBid);
     return (
         <div className='space-y-6'>
+            <Helmet>
+                <title>Heritage | Details</title>
+            </Helmet>
             <div>
                 <div className='flex gap-6'>
                     <div>
@@ -143,7 +147,7 @@ const PropertyDetails = () => {
                             <input type="text" placeholder={`Bidding Location`} onChange={e => setLocation(e.target.value)} className="input w-full rounded-none" />
                         </label>
                         <div className="space-y-4">
-                            
+
                             <div>
                                 <input
                                     type="range"

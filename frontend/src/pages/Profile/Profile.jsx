@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../provider/AuthProvider";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const Profile = () => {
@@ -82,6 +83,8 @@ const Profile = () => {
                                         <th>Type</th>
                                         <th>Status</th>
                                         <th>Bid Amount</th>
+                                        <th>View Property</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -115,6 +118,9 @@ const Profile = () => {
                                                 </td>
                                                 <th>
                                                     <p>$ {prop?.highestBid.bidAmount}</p>
+                                                </th>
+                                                <th>
+                                                    <Link to={`/properties/${prop._id}`}><button className="btn bg-blue-300 btn-sm">View Property</button></Link>
                                                 </th>
                                             </tr>
                                         ))

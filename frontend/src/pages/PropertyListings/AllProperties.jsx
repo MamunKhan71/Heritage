@@ -6,9 +6,13 @@ import PopularProperties from '../../components/PopularProperties';
 import Testimonials from '../../components/Testimonials';
 import StatCards from '../../components/StatCards';
 import PropertySearchBox from '../../components/PropertySearchBox';
+import { Helmet } from 'react-helmet';
 const AllProperties = () => {
     return (
         <div>
+            <Helmet>
+                <title>Heritage | Buy Properties</title>
+            </Helmet>
             <div className={`bg-[url('https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452007/header_tzskvx.jpg')] h-80 w-full relative`}>
                 <div className='bg-white rounded-lg shadow-lg backdrop-blur-sm max-w-3xl w-full absolute top-1/2 left-1/2 -translate-x-1/2'>
                     <Tabs className={'p-6 font-medium text-[#4B5563]'}>

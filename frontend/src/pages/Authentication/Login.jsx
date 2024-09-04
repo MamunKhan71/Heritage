@@ -52,7 +52,7 @@ const Login = () => {
     return (
         <div className="w-full lg:w-96 mx-auto px-4 lg:px-0  mt-12">
             <Helmet>
-                <title>BDCorporate | Login</title>
+                <title>Heritage | Login</title>
             </Helmet>
             <div className="flex items-center justify-center h-auto lg:h-[calc(100dvh-90px)] animate__animated animate__fadeIn">
                 <div className="flex flex-col items-center font-poppins w-full lg:pb-12">
