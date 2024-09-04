@@ -9,7 +9,7 @@ import PropertySearchBox from '../../components/PropertySearchBox';
 const AllProperties = () => {
     return (
         <div>
-            <div className={`bg-[url('header.jpg')] h-80 w-full relative`}>
+            <div className={`bg-[url('https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452007/header_tzskvx.jpg')] h-80 w-full relative`}>
                 <div className='bg-white rounded-lg shadow-lg backdrop-blur-sm max-w-3xl w-full absolute top-1/2 left-1/2 -translate-x-1/2'>
                     <Tabs className={'p-6 font-medium text-[#4B5563]'}>
                         <TabList >

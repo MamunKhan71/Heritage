@@ -6,8 +6,8 @@ const FeaturedSection = ({ isReversed }) => {
         <div className='p-16 w-full'>
             <div className={`flex w-full ${isReversed ? 'flex-row-reverse' : 'flex-row'} justify-between gap-12`}>
                 <div className='relative flex-1 w-full justify-end'>
-                    <img className='h-96 object-cover rounded-lg' src="firstSection.jpg" alt="" />
-                    <img className='h-64 rounded-lg absolute -bottom-5 right-64' src="secondSection.jpg" alt="" />
+                    <img className='h-96 object-cover rounded-lg' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/firstSection_dqxbij.jpg" alt="" />
+                    <img className='h-64 rounded-lg absolute -bottom-5 right-64' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/secondSection_e2ommn.jpg" alt="" />
                     <svg
                         className='absolute top-28 right-[40%]'
                         height="72px"

@@ -5,7 +5,7 @@ const Footer = () => {
         <div>
             <footer className="footer bg-[#ECF5FF] font-medium p-10">
                 <nav>
-                    <img className='h-20' src="logo.png" alt="" />
+                    <img className='h-20' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452005/logo_gxl8gk.png" alt="" />
                     <p className='max-w-sm font-medium'>Design amazing digital experiences
                         that create more happy in the world.</p>
                 </nav>

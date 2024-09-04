@@ -12,7 +12,7 @@ const Testimonials = () => {
                         everyday purchases and travel. It's the peace of mind I
                         was looking for."</p>
                     <div className='flex flex-col items-center justify-center'>
-                        <img className='size-12 rounded-full' src="profile.png" alt="" />
+                        <img className='size-12 rounded-full' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/profile_odrxyq.png" alt="" />
                         <p className='font-bold text-lg'>Tony Stark</p>
                         <p className='text-[#6B7280] text-base'>Marketing Manager, XYZ</p>
                     </div>
@@ -24,7 +24,7 @@ const Testimonials = () => {
                         everyday purchases and travel. It's the peace of mind I
                         was looking for."</p>
                     <div className='flex flex-col items-center justify-center'>
-                        <img className='size-12 rounded-full' src="profile.png" alt="" />
+                        <img className='size-12 rounded-full' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/profile_odrxyq.png" alt="" />
                         <p className='font-bold text-lg'>Tony Stark</p>
                         <p className='text-[#6B7280] text-base'>Marketing Manager, XYZ</p>
                     </div>

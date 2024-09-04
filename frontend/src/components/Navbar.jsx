@@ -6,7 +6,7 @@ const Navbar = () => {
     const { user, logout } = useContext(AuthContext)
     const navLinks = <>
         <li><Link to={'/properties'}>Buy</Link></li>
-        <li><Link to={'#'}>Sell</Link></li>
+        <li><Link to={'/property-upload'}>Sell</Link></li>
         <li><Link to={'#'}>Services</Link></li>
         <li><Link to={'/about'}>About</Link></li>
     </>
@@ -21,7 +21,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-center">
                 <a className="">
-                    <img className='h-20' src="logo.png" alt="" />
+                    <img className='h-20' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452005/logo_gxl8gk.png" alt="" />
                 </a>
             </div>
             <div className="navbar-end">

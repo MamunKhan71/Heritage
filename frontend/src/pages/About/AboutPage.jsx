@@ -12,7 +12,7 @@ const AboutPage = () => {
     return (
         <div>
             <div className='w-full h-96'>
-                <img className='w-full h-full object-cover' src="header.jpg" alt="" />
+                <img className='w-full h-full object-cover' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452007/header_tzskvx.jpg" alt="" />
             </div>
             <div className='mt-12'>
                 <StatCards />
@@ -20,7 +20,7 @@ const AboutPage = () => {
             <div className='space-y-12'>
                 <div className='mt-24'>
                     <div className='relative'>
-                        <img className='w-5/6 h-96 object-cover' src="firstSection.jpg" alt="" />
+                        <img className='w-5/6 h-96 object-cover' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/firstSection_dqxbij.jpg" alt="" />
                         <div className='bg-[#ECF5FF] p-6 space-y-4 absolute max-w-lg -bottom-24 right-0'>
                             <p className='text-orange-500 font-semibold'>Our Story</p>
                             <p className='font-bold text-3xl'>Efficient and Transparent
@@ -32,7 +32,7 @@ const AboutPage = () => {
                 </div>
                 <div className='pt-24'>
                     <div className='relative flex justify-end'>
-                        <img className='w-5/6 h-96 object-cover' src="firstSection.jpg" alt="" />
+                        <img className='w-5/6 h-96 object-cover' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/firstSection_dqxbij.jpg" alt="" />
                         <div className='bg-[#FDF0E7] p-6 space-y-4 absolute max-w-lg -bottom-24 left-0'>
                             <p className='text-orange-500 font-semibold'>Our Story</p>
                             <p className='font-bold text-3xl'>Efficient and Transparent
@@ -87,7 +87,7 @@ const AboutPage = () => {
 
                 </div>
                 <div className='flex-1 flex items-center justify-end'>
-                    <img className='w-1/2 h-full' src="firstSection.jpg" alt="" />
+                    <img className='w-1/2 h-full' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/firstSection_dqxbij.jpg" alt="" />
                 </div>
             </div>
             <div className='mt-40'>

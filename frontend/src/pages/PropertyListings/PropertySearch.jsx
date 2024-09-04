@@ -32,12 +32,12 @@ const PropertySearch = () => {
             <div className='w-full'>
                 <div className='grid grid-cols-1 gap-5'>
                     {!properties.length && <div className='flex items-center justify-center w-full'>
-                        <img src="not.webp" alt="" />
+                        <img src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/not_rlnqcg.webp" alt="" />
                     </div>}
                     {
                         properties?.map(property => (
                             <div className='flex gap-12 w-full bg-[#F9FAFB] rounded-lg p-12'>
-                                <img className='w-40 rounded-lg h-48 object-cover' src="secondSection.jpg" alt="" />
+                                <img className='w-40 rounded-lg h-48 object-cover' src="https://res.cloudinary.com/dz3kxnsxr/image/upload/v1725452006/secondSection_e2ommn.jpg" alt="" />
                                 <div className='w-full space-y-4'>
                                     <div className='flex items-center justify-between'>
                                         <h2 className='font-bold text-xl'>{property?.propertyDetails?.title}</h2>
